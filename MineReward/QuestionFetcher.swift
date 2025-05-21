@@ -6,7 +6,7 @@ class QuestionFetcher: ObservableObject {
     @Published var question: String = "Loading question..."
     @Published var correctAnswer: String = ""
 
-    private var db = Firestore.firestore()
+    private var db = Firestore.firestore(database: "minereward")
 
     func fetchQuestion() {
         // Fetch one random question document
@@ -18,8 +18,9 @@ class QuestionFetcher: ObservableObject {
             }
 
             guard let documents = snapshot?.documents, !documents.isEmpty else {
-                            self.question = "What's 5 + 3?"
-                            self.correctAnswer = "8"
+                print("Empty documents")
+                self.question = "What's 5 + 3?"
+                self.correctAnswer = "8"
                 return
             }
 
